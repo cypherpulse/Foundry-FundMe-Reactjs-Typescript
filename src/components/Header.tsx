@@ -6,7 +6,7 @@ import { useDarkMode } from "@/hooks/useDarkMode";
 import { useAccount, useChainId, useSwitchChain, useDisconnect } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { truncateAddress } from "@/utils/format";
-import { SEPOLIA_CHAIN_ID, FUNDME_CONTRACT_ADDRESS } from "@/utils/constants";
+import { BASE_CHAIN_ID, FUNDME_CONTRACT_ADDRESS } from "@/utils/constants";
 
 export default function Header() {
   // Removed dark mode logic
@@ -19,13 +19,13 @@ export default function Header() {
   const [isNetworkSwitching, setIsNetworkSwitching] = useState(false);
   const [walletCleared, setWalletCleared] = useState(false);
 
-  const isCorrectNetwork = chainId === SEPOLIA_CHAIN_ID;
+  const isCorrectNetwork = chainId === BASE_CHAIN_ID;
 
   const handleNetworkSwitch = async () => {
     if (!isCorrectNetwork && switchChain) {
       setIsNetworkSwitching(true);
       try {
-        await switchChain({ chainId: SEPOLIA_CHAIN_ID });
+        await switchChain({ chainId: BASE_CHAIN_ID });
       } catch (error) {
         console.error("Failed to switch network:", error);
       } finally {
@@ -91,7 +91,7 @@ export default function Header() {
           {/* Main nav buttons, responsive */}
           <div className={`flex flex-wrap gap-2 sm:gap-4 items-center justify-center sm:justify-end w-full sm:w-auto overflow-x-auto ${menuOpen ? '' : 'hidden sm:flex'}`}>
             <Button
-              onClick={() => window.open(`https://sepolia.etherscan.io/address/${FUNDME_CONTRACT_ADDRESS}`, '_blank')}
+              onClick={() => window.open(`https://basescan.org/address/${FUNDME_CONTRACT_ADDRESS}`, '_blank')}
               className="bg-secondary-500 hover:bg-secondary-600 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
               data-testid="button-view-transactions"
             >
@@ -104,7 +104,7 @@ export default function Header() {
                   <div className="flex items-center space-x-2 bg-secondary-500 px-3 py-1 rounded-full">
                     <div className="w-2 h-2 bg-success-500 rounded-full animate-pulse" />
                     <span className="text-white text-sm font-medium">
-                      Sepolia
+                      Base
                     </span>
                   </div>
                 ) : (
