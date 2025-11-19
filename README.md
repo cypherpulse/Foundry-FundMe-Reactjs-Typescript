@@ -2,7 +2,7 @@
 
 [🛠 Foundry FundMe Smart Contract GitHub](https://github.com/John-Mukhwana/solidity-foundry-fund-me.git)
 
-FundMe is a modern, decentralized funding platform built with React, TypeScript, Vite, and Tailwind CSS. It allows users to fund innovative projects securely on the Ethereum Sepolia testnet.
+FundMe is a modern, decentralized funding platform built with React, TypeScript, Vite, and Tailwind CSS. It allows users to fund innovative projects securely on the Base mainnet.
 
 ---
 ![FundeMe Frontend](./public/foundry.PNG)
@@ -53,13 +53,13 @@ To run this project, you need to create a `.env` file in the root directory with
 ```
 VITE_ALCHEMY_KEY=your-alchemy-key
 VITE_REOWN_PROJECT_ID=your-reown-project-id
-VITE_SEPOLIA_RPC_URL=https://sepolia.rpc.thirdweb.com
+VITE_BASE_RPC_URL=https://mainnet.base.org
 ```
 
 **Descriptions:**
-- `VITE_ALCHEMY_KEY`: Your Alchemy API key for accessing Ethereum Sepolia nodes (used for backend scripts or advanced features).
+- `VITE_ALCHEMY_KEY`: Your Alchemy API key for accessing Ethereum Base nodes (used for backend scripts or advanced features).
 - `VITE_REOWN_PROJECT_ID`: Your Reown AppKit project ID for wallet connection and modal integration.
-- `VITE_SEPOLIA_RPC_URL`: The Sepolia RPC endpoint for frontend contract interactions. Use a CORS-enabled public RPC like Thirdweb.
+- `VITE_BASE_RPC_URL`: The Base mainnet RPC endpoint for frontend contract interactions. Use a CORS-enabled public RPC like Base official.
 
 Make sure to keep your keys secure and never commit your `.env` file to public repositories.
 
