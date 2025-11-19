@@ -1,25 +1,25 @@
 import { createConfig, http } from "wagmi";
-import { sepolia } from "viem/chains";
+import { base } from "viem/chains";
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 
 
 // Get projectId from environment variables
 const projectId = import.meta.env.VITE_REOWN_PROJECT_ID;
-const SEPOLIA_RPC_URL = import.meta.env.VITE_SEPOLIA_RPC_URL;
+const BASE_RPC_URL = import.meta.env.VITE_BASE_RPC_URL;
 
 // Create wagmi adapter
 const wagmiAdapter = new WagmiAdapter({
-  networks: [sepolia],
+  networks: [base],
   projectId,
 });
 
 // Create wagmi config
 export const config = createConfig({
-  chains: [sepolia],
+  chains: [base],
   transports: {
-    [sepolia.id]: http(
-  SEPOLIA_RPC_URL
+    [base.id]: http(
+  BASE_RPC_URL
     ),
   },
 });
@@ -28,8 +28,8 @@ export const config = createConfig({
 createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [sepolia],
-  defaultNetwork: sepolia,
+  networks: [base],
+  defaultNetwork: base,
   metadata: {
     name: "FundMe",
     description: "Decentralized Funding Platform",
