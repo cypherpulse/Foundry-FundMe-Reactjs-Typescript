@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="w-full bg-gray-900 text-white py-6 mt-12 border-t border-gray-800">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4">
         <div className="flex flex-col items-center md:items-start">
-          <span className="font-semibold text-lg">Developed by cypherpulse.base.eth</span>
+          <span className="font-semibold text-lg">Developed by CypherPulse.base.eth</span>
           <a
             href="https://github.com/John-Mukhwana"
             target="_blank"
@@ -36,13 +36,13 @@ const Footer = () => {
             Smart Contract GitHub
           </a>
           <a
-            href="https://sepolia.etherscan.io/address/0xc077A97461A1053150193edFBfEDb07Be1677c00"
+            href="https://basescan.org/address/0x5C6B1d462742AA58288F601E4722Df232682442b"
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 py-2 rounded bg-yellow-500 hover:bg-yellow-600 transition-colors font-medium flex items-center gap-2"
           >
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18c-4.411 0-8-3.589-8-8 0-4.411 3.589-8 8-8 4.411 0 8 3.589 8 8 0 4.411-3.589 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
-            SepoliaScan
+            BaseScan
           </a>
         </div>
       </div>
