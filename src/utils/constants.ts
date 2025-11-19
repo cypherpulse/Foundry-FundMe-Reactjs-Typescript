@@ -1,7 +1,7 @@
 // FundMe Smart Contract Details
 export const FUNDME_CONTRACT_ADDRESS =
-  "0xc077A97461A1053150193edFBfEDb07Be1677c00" as const;
-export const SEPOLIA_CHAIN_ID = 11155111;
+  "0x5C6B1d462742AA58288F601E4722Df232682442b" as const;
+export const BASE_CHAIN_ID = 8453;
 
 // FundMe Contract ABI
 export const FUNDME_ABI = [
