@@ -20,7 +20,7 @@ FundMe is a modern, decentralized funding platform that empowers creators and in
 
 ## ✨ Features
 
-- **🔗 Wallet Integration**: Seamless connection with Ethereum wallets using Reown AppKit
+- **🔗 Wallet Integration**: Seamless connection with Ethereum wallets using RainbowKit and WalletConnect
 - **📊 Real-time Analytics**: View contract statistics, funding progress, and contributor data
 - **💰 Secure Funding**: Fund projects with ETH, tracked on the blockchain
 - **👥 Contributor Tracking**: Monitor your funding history and contributions
@@ -38,9 +38,10 @@ FundMe is a modern, decentralized funding platform that empowers creators and in
 - **Tailwind CSS** - Utility-first CSS framework
 
 ### Blockchain Integration
-- **wagmi** - React hooks for Ethereum
+- **wagmi v2** - React hooks for Ethereum
 - **viem** - Low-level Ethereum library
-- **Reown AppKit** - Wallet connection modal
+- **RainbowKit v2** - Beautiful wallet connection UI
+- **WalletConnect v2** - Cross-platform wallet connectivity protocol
 
 ### UI/UX
 - **shadcn/ui** - High-quality React components
@@ -132,8 +133,8 @@ Create a `.env` file in the root directory with the following variables:
 # Required: Your Alchemy API key for Base network access
 VITE_ALCHEMY_KEY=your_alchemy_api_key_here
 
-# Required: Reown AppKit project ID for wallet connections
-VITE_REOWN_PROJECT_ID=your_reown_project_id_here
+# Required: WalletConnect Project ID for wallet connections
+VITE_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id_here
 
 # Required: Base mainnet RPC endpoint
 VITE_BASE_RPC_URL=https://mainnet.base.org
@@ -146,10 +147,102 @@ VITE_BASE_RPC_URL=https://mainnet.base.org
    - Create a free account
    - Generate an API key for Base network
 
-2. **Reown Project ID**:
-   - Visit [Reown Cloud](https://cloud.reown.com/)
+2. **WalletConnect Project ID**:
+   - Visit [WalletConnect Cloud](https://cloud.walletconnect.com/)
    - Create a new project
    - Copy the Project ID
+
+## 🔗 Wallet Connection Setup
+
+This project uses **RainbowKit v2** with **WalletConnect v2** for seamless wallet integration. RainbowKit provides a beautiful, responsive wallet connection modal that supports multiple wallet types.
+
+### Supported Wallets
+
+RainbowKit automatically detects and supports the following wallets:
+- **MetaMask** (Desktop & Mobile)
+- **Coinbase Wallet**
+- **WalletConnect** (Mobile wallets like Trust Wallet, Rainbow, etc.)
+- **Injected wallets** (Brave, Opera, etc.)
+- **Ledger** and **Trezor** hardware wallets
+
+### WalletConnect Configuration
+
+The project is configured to use **WalletConnect v2** with the following features:
+
+- **Cross-platform compatibility**: Connect mobile wallets to desktop dApps
+- **Secure communication**: End-to-end encrypted connections
+- **Multi-chain support**: Works with Base and other EVM networks
+- **Session management**: Persistent connections across browser sessions
+
+### Setting Up Wallet Connectors
+
+The wallet configuration is handled in `src/lib/wagmi.ts`. Here's how RainbowKit is configured:
+
+```typescript
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { base } from 'wagmi/chains';
+
+// RainbowKit configuration
+const config = getDefaultConfig({
+  appName: 'FundMe',
+  projectId: import.meta.env.VITE_WALLETCONNECT_PROJECT_ID,
+  chains: [base],
+  ssr: false,
+});
+```
+
+### Key Configuration Options
+
+- **`appName`**: Your dApp's name displayed in wallet connection modals
+- **`projectId`**: Your WalletConnect Cloud project ID
+- **`chains`**: Array of supported blockchain networks (Base mainnet)
+- **`ssr`**: Disabled for client-side rendering
+
+### Customizing Wallet List
+
+You can customize which wallets appear in the connection modal by modifying the configuration:
+
+```typescript
+import { connectorsForWallets } from '@rainbow-me/rainbowkit';
+import { metaMaskWallet, coinbaseWallet, walletConnectWallet } from '@rainbow-me/rainbowkit/wallets';
+
+// Custom wallet list
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommended',
+    wallets: [metaMaskWallet, coinbaseWallet],
+  },
+  {
+    groupName: 'Others',
+    wallets: [walletConnectWallet],
+  },
+], {
+  appName: 'FundMe',
+  projectId: import.meta.env.VITE_WALLETCONNECT_PROJECT_ID,
+});
+```
+
+### Testing Wallet Connections
+
+To test wallet connections in development:
+
+1. Start the development server: `pnpm run dev`
+2. Click the "Connect Wallet" button
+3. Try connecting with different wallet types
+4. Test network switching to Base
+5. Verify transaction signing and sending
+
+### Troubleshooting
+
+**Common Issues:**
+
+- **"Project ID not found"**: Ensure `VITE_WALLETCONNECT_PROJECT_ID` is set correctly
+- **"Unsupported network"**: Make sure Base network is configured in your wallet
+- **"Connection failed"**: Check your internet connection and try refreshing the page
+
+**Mobile Testing:**
+- Use WalletConnect QR codes to test mobile wallet connections
+- Ensure your mobile wallet supports WalletConnect v2
 
 ## 📁 Project Structure
 
@@ -254,7 +347,8 @@ If you have any questions or need help:
 ## 🙏 Acknowledgments
 
 - [Coinbase Base](https://base.org/) for the excellent Layer 2 network
-- [Reown](https://reown.com/) for wallet integration tools
+- [RainbowKit](https://www.rainbowkit.com/) for beautiful wallet connection UI
+- [WalletConnect](https://walletconnect.com/) for cross-platform wallet connectivity
 - [shadcn/ui](https://ui.shadcn.com/) for beautiful UI components
 - The Ethereum community for inspiration and tools
 
